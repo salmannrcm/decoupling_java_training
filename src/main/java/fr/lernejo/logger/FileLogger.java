@@ -1,14 +1,12 @@
 package fr.lernejo.logger;
 
-import fr.lernejo.logger.Logger;
-
-import static java.nio.file.StandardOpenOption.APPEND;
-import static java.nio.file.StandardOpenOption.CREATE;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import static java.nio.file.StandardOpenOption.APPEND;
+import static java.nio.file.StandardOpenOption.CREATE;
 
 public class FileLogger implements Logger {
     private final Path path;

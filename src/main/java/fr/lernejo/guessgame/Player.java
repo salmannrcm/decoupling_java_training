@@ -1,7 +1,6 @@
 package fr.lernejo.guessgame;
 
-public interface Player
-{
+public interface Player {
     long askNextGuess();
 
     /**

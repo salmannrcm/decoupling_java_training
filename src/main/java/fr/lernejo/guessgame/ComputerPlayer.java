@@ -1,25 +1,38 @@
 package fr.lernejo.guessgame;
 
-public class ComputerPlayer implements Player{
+import java.security.SecureRandom;
 
-    private long min = Long.MIN_VALUE;
-    private long max = Long.MAX_VALUE;
+public class ComputerPlayer implements Player{
+    private int lastGuess = -1;
+    private int max;
+    private int low;
+    private boolean response;
 
     @Override
     public long askNextGuess() {
-        return avg();
+        if (lastGuess == -1) {
+            max = 100;
+            low = 0;
+            lastGuess = (int) new SecureRandom().nextLong(low, max);
+        }
+        if (response){
+            low = lastGuess;
+            lastGuess = (int) new SecureRandom().nextLong(low, max);
+        }
+        else
+        {
+            max = lastGuess;
+            lastGuess = (int) new SecureRandom().nextLong(low, max);
+        }
+        //lastGuess = response ? lastGuess * 2 : lastGuess / 2;
+        return lastGuess;
     }
 
-    private long avg()
-    {
-        return (min + max) / 2;
-    }
-
+    /**
+     * Called by {@link Simulation} to inform that the previous guess was lower or greater that the number to find.
+     */
     @Override
     public void respond(boolean lowerOrGreater) {
-        if(lowerOrGreater)
-            max = avg();
-        else
-            min =avg();
+        response = lowerOrGreater;
     }
 }

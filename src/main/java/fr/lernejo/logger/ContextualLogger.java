@@ -18,3 +18,4 @@ public class ContextualLogger implements Logger {
         delegateLogger.log(LocalDateTime.now().format(FORMATTER) + " " + callerClass + " " + message);
     }
 }
+

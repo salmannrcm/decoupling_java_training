@@ -5,33 +5,24 @@ import fr.lernejo.logger.LoggerFactory;
 
 import java.util.Scanner;
 
-public class HumanPlayer implements Player
-{
-    private final Logger logger = LoggerFactory.getLogger("player");
-    Scanner UserInput = new Scanner(System.in);
+public class HumanPlayer implements Player {
+    private static final Logger logger = LoggerFactory.getLogger("player");
 
     @Override
-    public long askNextGuess()
-    {
-        //long tmp;
-        logger.log("Please enter the number to be compared : ");
-        /*tmp = UserInput.nextLong();
-        UserInput.nextLine();
-        return tmp;*/
-        do {
-            String input = UserInput.nextLine();
-            try
-            {
-                return Long.parseLong(input);
-            }catch (NumberFormatException e){
-                logger.log("This was not a number, try again !");
-            }
-        }while(true);
+    public long askNextGuess() {
+        long value = -1;
+        try {
+            value = new Scanner(System.in).nextLong();
+        } catch (Exception e) {
+            logger.log("Mauvais nombre !");
+        }
+        return value;
     }
 
+    /**
+     * Called by {@link Simulation} to inform that the previous guess was lower or greater that the number to find.
+     */
     @Override
-    public void respond(boolean lowerOrGreater)
-    {
-        logger.log("Your guess was  " + (lowerOrGreater ? "lower" : "greater"));  //ternaire
+    public void respond(boolean lowerOrGreater) {
     }
 }
